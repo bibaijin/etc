@@ -15,7 +15,8 @@ Rxvt.scrollBar_right: true
 ! 字体
 ! URxvt.font: 9x15
 Xft.dpi: 96
-URxvt.font: xft:DejaVu Sans Mono:size=13, xft:WenQuanYi Micro Hei Mono:size=13
+! URxvt.font: xft:DejaVu Sans Mono:size=13, xft:WenQuanYi Micro Hei Mono:size=13
+URxvt.font: xft:WenQuanYi Micro Hei Mono:size=16
 ! URxvt.font: xft:WenQuanYi Micro Hei Mono:size=13
 ! URxvt.boldfont: xft:WenQuanYi Micro Hei Mono:style=bold, size=13
 ! URxvt.letterSpace: -5

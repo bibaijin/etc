@@ -228,6 +228,7 @@ exec feh -z --bg-scale ~/共享/图片/雪拥科大/*
 # exec ~/.nutstore/dist/bin/nutstore-pydaemon.py
 # solarized 配色
 exec xrdb -load $HOME/.Xresources
+exec fcitx
 # 星际译王
 # exec_always stardict
 # assign [class="Stardict"] 4:工具
