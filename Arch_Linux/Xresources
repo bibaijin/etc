@@ -15,8 +15,13 @@ Rxvt.scrollBar_right: true
 ! 字体
 ! URxvt.font: 9x15
 Xft.dpi: 96
-! URxvt.font: xft:DejaVu Sans Mono:size=16, xft:WenQuanYi Micro Hei Mono:size=16
-URxvt.font: xft:WenQuanYi Micro Hei Mono:size=16
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=18, xft:WenQuanYi Micro Hei Mono:size=18
+! URxvt.font: xft:WenQuanYi Micro Hei Mono:size=16, xft:DejaVu Sans Mono for Powerline:size=16
+! URxvt.font: xft: Inconsolata for Powerline:size=16, xft:WenQuanYi Micro Hei Mono:size=16
+! URxvt.font: xft: Source Code Pro for Powerline:size=16, xft:WenQuanYi Micro Hei Mono:size=16
+! URxvt.font: xft:WenQuanYi Micro Hei Mono:size=16
+xterm*faceName: DejaVu Sans Mono for Powerline:size=16
+xterm*faceNameDoublesize: WenQuanYi Micro Hei Mono:size=16
 ! URxvt.font: xft:WenQuanYi Micro Hei Mono:size=13
 ! URxvt.boldfont: xft:WenQuanYi Micro Hei Mono:style=bold, size=13
 ! URxvt.letterSpace: -5

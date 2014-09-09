@@ -96,34 +96,34 @@ if !exists(":DiffOrig")
 endif
 
 """""""""""""""""""""""""
-" pathogen 设置
-" execute pathogen#infect()
-" syntax on
-
 " vundle 官方配置
-set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-" Bundle 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
-" Bundle 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
-" Bundle 'Valloric/ListToggle'
 Plugin 'scrooloose/syntastic'
-" Bundle 'scrooloose/syntastic'
 Plugin 'plasticboy/vim-markdown'
-" Bundle 'plasticboy/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
-" Vundle
-set showcmd
+" powerline 的设置
+set laststatus=2 " Always show the statusline
+set encoding=utf-8
+set t_Co=256
+let g:Powerline_symbols='fancy'
+" let g:Powerline_colorscheme='solarized256'
+" set fillchars+=stl:\ ,stlnc:\
+" let g:Powerline_cache_enabled=1
+" let g:Powerline_cache_file='~/.vim/bundle/powerline/Powerline.cache'
+" set noshowmode
+
+" set showcmd
 " latex
 " let g:tex_fold_enabled = 1
 " let g:tex_indent_brace = 0
@@ -147,18 +147,6 @@ filetype indent on
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
-
-" powerline 的设置
-" Bundle 'Lokaltog/vim-powerline'
-" let g:Powerline_symbols='fancy'
-" let g:Powerline_colorscheme='solarized256'
-" set fillchars+=stl:\ ,stlnc:\
-" set nocompatible
-" let g:Powerline_cache_enabled=1
-" let g:Powerline_cache_file='~/.vim/bundle/powerline/Powerline.cache'
-" set t_Co=256
-" set laststatus=2 " Always show the statusline
-" set noshowmode
 
 " Markdown 设置
 " let mapleader=","
