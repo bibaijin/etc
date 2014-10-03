@@ -12,9 +12,9 @@
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font xft:WenQuanYi Zen Hei Mono 11
-font xft:WenQuanYi Micro Hei Mono
+# font xft:WenQuanYi Micro Hei Mono
+font xft:方正苏新诗柳楷简体 14
 # font xft:方正楷体_GBK
-# font xft:方正苏新诗柳楷简体
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
