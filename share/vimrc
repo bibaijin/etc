@@ -97,88 +97,70 @@ endif
 
 """""""""""""""""""""""""
 " vundle 官方配置
+""""""""""""""""""""""""
+
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Valloric/ListToggle'
-Plugin 'scrooloose/syntastic'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'Lokaltog/powerline'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/ListToggle'
+" Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
-" powerline 的设置
+" powerline 设置
 set laststatus=2 " Always show the statusline
 set encoding=utf-8
 set t_Co=256
 let g:Powerline_symbols='fancy'
-" let g:Powerline_colorscheme='solarized256'
-" set fillchars+=stl:\ ,stlnc:\
-" let g:Powerline_cache_enabled=1
-" let g:Powerline_cache_file='~/.vim/bundle/powerline/Powerline.cache'
-" set noshowmode
-
-" set showcmd
-" latex
-" let g:tex_fold_enabled = 1
-" let g:tex_indent_brace = 0
-" vim-latex
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-filetype plugin on
-
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-" set shellslash
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: This enables automatic indentation as you type.
-filetype indent on
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-
-" Markdown 设置
-" let mapleader=","
-" nnoremap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown 设置
 " let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_initial_foldlevel=2
+" let g:vim_markdown_initial_foldlevel=2
 
-""""""""""""""""""""""""""
-" LaTeX 设置
-" let g:tex_indent_items=0
-" solarized 设置
-" syntax enable
-" if has('gui_running')
-"     set background=light
-" else
-"     set background=dark
-" endif
+" 星际译王
+" nmap F :call Mydict()<CR>
+" set keywordprg=sdcv
+
+"""""""""""""""""""""""
+" 基本设置
+"""""""""""""""""""""""
+
+" 主题
 set background=dark
-" colorscheme solarized
-colorscheme desert
-" set cursorline
+colorscheme solarized
+" colorscheme desert
+" 当前行高亮
+set cursorline
 " hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white
 " hi CursorColumn cterm=NONE ctermbg=darkblue ctermfg=white
-" 基本设置
+
+" 设置编码，以支持中文
 set fileencodings-=latin1
 set fileencodings+=gb18030,big5,latin1
-nmap F :call Mydict()<CR>
-" set keywordprg=sdcv
+
+" 调整缩进
+" 改变 ">" 的平移单位
 set shiftwidth=4
+" 改变 "<Tab>" 键的缩进量
 set softtabstop=4
-set formatoptions+=mM
+" 把制表符转变为空格
+set expandtab
+
+" 排版
+" 自动换行
 set textwidth=78
+" m: 按字符为单位分行
+" M: 连接行时，不要插入空格
+set formatoptions+=mM
+
+" 储存状态信息
 set viminfo+=!

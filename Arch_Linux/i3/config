@@ -107,7 +107,7 @@ bindsym Mod1+Shift+2 move container to workspace 2:网络
 # bindsym Mod1+Shift+3 move workspace 3
 bindsym Mod1+Shift+3 move container to workspace 3:Shell
 # bindsym Mod1+Shift+4 move workspace 4
-bindsym Mod1+Shift+4 move workspace 4:工具
+bindsym Mod1+Shift+4 move container to workspace 4:工具
 bindsym Mod1+Shift+5 move workspace 5
 bindsym Mod1+Shift+6 move workspace 6
 bindsym Mod1+Shift+7 move workspace 7
@@ -165,7 +165,7 @@ bindsym Mod1+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status --config ~/.i3status.conf
+        status_command i3status --config ~/.config/i3status/config
 	# colors {
             # background #000000
             # statusline #ffffff
@@ -216,23 +216,29 @@ mode "$mode_system" {
 bindsym Mod4+l mode "$mode_system"
 
 # 设置开机启动程序
+
 # 打字时禁用触摸板 2 s
 # exec_always syndaemon -t -k -i 2 &
 # exec syndaemon -t -k -i 2 &
 exec syndaemon -i 2 -d
+
 # 设置壁纸
-# exec_always feh -z --bg-scale ~/图片/雪拥科大/*
-exec feh -z --bg-scale ~/共享/图片/雪拥科大/*
+exec feh -z --bg-scale ~/.wallpaper/*
+
 # 坚果云
 # exec_always ~/.nutstore/dist/bin/nutstore-pydaemon.py
 # exec ~/.nutstore/dist/bin/nutstore-pydaemon.py
+
 # solarized 配色
-exec xrdb -load $HOME/.Xresources
-exec fcitx
+# exec xrdb -load $HOME/.Xresources
+
+# exec fcitx
+
 # 星际译王
 # exec_always stardict
-# assign [class="Stardict"] 4:工具
+assign [class="Stardict"] 4:工具
 # exec stardict
+
 # TUNet
 # exec_always TUNet64
 assign [class="TUNet64"] 4:工具
