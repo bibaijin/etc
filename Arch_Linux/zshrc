@@ -1,126 +1,132 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/bibaijin/.zshrc'
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="random"
-# ZSH_THEME="my"
-# ZSH_THEME="linuxonly"
-# ZSH_THEME="simple"
-# ZSH_THEME="bureau"
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME="agnoster"
-# ZSH_THEME="nicoulaj"
-# ZSH_THEME="arrow"
-# ZSH_THEME="gnzh"
-# ZSH_THEME="sporty_256"
-# ZSH_THEME="obraun"
-# ZSH_THEME="jispwoso"
-DEFAULT_USER="bibaijin"
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+##########################
+# my
+##########################
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to disable command auto-correction.
-DISABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# plugins=(git autojump)
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-export PATH=$HOME/bin:/usr/local/bin:/home/bibaijin/.cabal/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# 我的设置
-
-# 默认编辑器
-export EDITOR='vim'
-
-# 更改 $PATH
-# If user ID is greater than or equal to 1000 & if ~/bin exists and is a directory & if ~/bin is not already in your $PATH
-# then export ~/bin to your $PATH.
-# if [[ $UID -ge 1000 && -d $HOME/bin && -z $(echo $PATH | grep -o $HOME/bin) ]]
-# then
-#     export PATH=${PATH}:$HOME/bin
-# fi
-
-export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
-
+##########################
+# 环境变量
+##########################
+# 中文处理
+export LC_CTYPE=zh_CN.UTF-8
 # 中文排序
 export LC_COLLATE=zh_CN.UTF-8
+export EDITOR='vim'
+export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
 
-# racket 自动补全
-# source /usr/share/racket/pkgs/shell-completion/racket-completion.zsh
+##########################
+# 插件管理
+##########################
 
-# autojump 自动补全
-# autoload -U compinit && compinit -u
-# . /usr/share/autojump/autojump.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /etc/profile.d/autojump.zsh
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+source /home/bibaijin/.config/zsh/antigen/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle tarruda/zsh-autosuggestions
+# antigen bundle hchbaw/auto-fu.zsh
+antigen bundle olivierverdier/zsh-git-prompt
 
-# 从 bash 中移植
-# alias susp='echo "mem" | sudo tee /sys/power/state'
+# Load the oh-my-zsh's library.
+# antigen use oh-my-zsh
 
-# alias markdown='/usr/local/bin/Markdown.pl --html4tags'
-# export TERM=xterm-256color
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+# antigen bundle git
+# antigen bundle heroku
+# antigen bundle pip
+# antigen bundle lein
+# antigen bundle command-not-found
+
+# Load the theme.
+# antigen theme robbyrussell
+
+# Tell antigen that you're done.
+antigen apply
+
+# auto-fu.zsh
+# zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+# zstyle ':completion:*' completer _oldlist _complete
+# zle -N zle-keymap-select auto-fu-zle-keymap-select
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Setup zsh-autosuggestions
+# source ~/.zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically
+zle-line-init() {
+    zle autosuggest-start
+}
+zle -N zle-line-init
+
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+# bindkey '^T' autosuggest-toggle
+
+##########################
+# 提示符
+##########################
+
+autoload -U promptinit
+promptinit
+# prompt adam2
+# git
+# source ~/bin/zsh-git-prompt/zshrc.sh
+user="%{$fg[cyan]%}%n%{$reset_color%}"
+host="%{$fg[yellow]%}%m%{$reset_color%}"
+work_path="%{$fg_no_bold[green]%}%~%{$reset_color%}"
+# PROMPT='$user%B@%b$host: $work_path$(git_super_status)> %B%# '
+PS1='$user%B@%b$host: $work_path $(git_super_status)
+%B>>%b '
+PS2='.. '
+RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
+
+##########################
+# 自动补全
+##########################
+
+if [ "x$CASE_SENSITIVE" = "xtrue" ]; then
+  zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  unset CASE_SENSITIVE
+else
+  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  zstyle ':completion:*' menu select
+fi
+
+zstyle ':completion:*' list-colors ''
+
+# zstyle -e ':completion:*:default' list-colors \
+#     'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=01}:${(s.:.)LS_COLORS}")'
+
+##########################
+# 预测
+##########################
+# autoload -U predict-on
+# predict-on
+# zle -N predict-on
+# zle -N predict-off
+# bindkey '^X^Z' predict-on
+# bindkey '^z' predict-off
 
 # ######################
-# Pacman alias examples
+# Alias
 # ######################
 
+alias ls="ls --color=auto"
+alias ll="ls -l --color=auto"
+alias la="ls -a --color=auto"
+
+# pacman
 # Synchronize with repositories and then upgrade packages that are out of date
 # on the local system.
 alias pacupg='sudo pacman -Syu'
@@ -180,13 +186,12 @@ alias pacinsd='sudo pacman -S --asdeps'
 # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
 alias pacmir='sudo pacman -Syy'
 
-# ######################
-# Alias
-# ######################
-
 # alias cp="acp -g"
 # alias mv="amv -g"
 # alias maxima="rmaxima"
+# alias racket="racket -il readline"
+
+# pandoc
 alias pandz="pandoc -t dzslides --template=$HOME/share/template/pandoc/dzslides.html \
     -s -i --slide-level=2 --mathjax --bibliography=ref.bib"
 alias panrv="pandoc -t revealjs -s -i --slide-level=2 --mathjax \
@@ -197,7 +202,6 @@ alias panbeamer="pandoc -t beamer --latex-engine=xelatex \
 # alias panhtml="pandoc -t html5 -s -c /home/bibaijin/share/template/pandoc/html.css --toc"
 alias panhtml="pandoc -t html5 --self-contained \
     --template=/home/bibaijin/share/template/pandoc/pure/html5-my.html --toc --toc-depth=3"
-# alias racket="racket -il readline"
 
 # ######################
 # 自定义函数
@@ -238,3 +242,4 @@ function ranger-cd {
 # bind '"\C-o":"ranger-cd\C-m"'
 bindkey -s '\C-o' '^qranger-cd\n'
 alias ranger="ranger-cd"
+
