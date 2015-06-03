@@ -1,0 +1,56 @@
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import System.IO
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ToggleLayouts
+import XMonad.Actions.TopicSpace
+
+myWorkspaces = [ "1:Web", "2:File", "3", "4", "5:Daemon", "6", "7", "8", "9"]
+
+myManageHook = composeAll
+               [ resource =? "TUNet64" --> doShift "5:Daemon"
+               , manageDocks
+               , manageHook defaultConfig ]
+
+tiledLayout = Tall nmaster delta ratio
+              where
+                nmaster = 1
+                ratio = 1/2
+                delta = 3/100
+
+workspaceLayouts = defaultLayouts
+                   where
+                    defaultLayouts = tiledLayout ||| Mirror tiledLayout
+-- workspaceLayouts = layoutHook defaultConfig
+
+myLayout = avoidStruts $ smartBorders $ toggleLayouts Full workspaceLayouts
+-- myLayout = avoidStruts  $  layoutHook defaultConfig
+
+myKeys = [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
+         , ((0, xK_Print), spawn "scrot")
+         , ((mod1Mask, xK_d), spawn "j4-dmenu-desktop")
+         , ((mod1Mask, xK_f), sendMessage ToggleLayout)
+         , ((mod1Mask, xK_g), spawn "gmrun")
+         ]
+
+myLogHook xmobarPipe = dynamicLogWithPP xmobarPrinter
+    where
+        xmobarPrinter = defaultPP
+            { ppOutput = hPutStrLn xmobarPipe
+            , ppTitle = xmobarColor "green" "" . shorten 50 }
+
+myConfig xmobarPipe = defaultConfig
+           { workspaces = myWorkspaces
+           , layoutHook = myLayout
+           , manageHook = myManageHook
+           , logHook = myLogHook xmobarPipe
+           , terminal = "urxvt" }
+           `additionalKeys` myKeys
+
+main = do
+    xmobarPipe <- spawnPipe "/usr/bin/xmobar /home/bibaijin/.xmobarrc"
+    xmonad $ myConfig xmobarPipe

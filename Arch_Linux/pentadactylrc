@@ -1,0 +1,13 @@
+" hg7157
+
+loadplugins '\.(js|penta)$'
+group user
+map -modes=n h -ex tabprevious
+map -modes=n l -ex tabnext
+map -count -modes=n,v J <count><C-f>
+map -count -modes=n,v K <count><C-b>
+" set defsearch=gfsoso
+set guioptions=bCrTB
+set passkeys=localhost:8080:jkroae<CR>,gi
+
+" vim: set ft=pentadactyl:

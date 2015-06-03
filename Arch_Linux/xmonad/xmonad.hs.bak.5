@@ -1,0 +1,80 @@
+-- 导入
+import XMonad
+
+import XMonad.Hooks.DynamicLog  -- statusbar
+import XMonad.Hooks.ManageDocks -- dock/tray mgmt
+import XMonad.Hooks.UrgencyHook -- window alert bells
+
+import XMonad.Layout.Named    -- custom layout names
+import XMonad.Layout.NoBorders  -- smart borders on solo clients
+import XMonad.Layout.ToggleLayouts
+
+import XMonad.Util.Run(spawnPipe)   -- spawnPipe and hPutStrLn
+import XMonad.Util.EZConfig -- append key/mouse bindings
+
+import System.IO
+import XMonad.Actions.TopicSpace
+
+import qualified XMonad.StackSet as W
+
+main = do
+    status <- spawnPipe myDzenStatus    -- xmonad status on the left
+    conky <- spawnPipe myDzenConky  -- conky stats on the right
+    xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+        { terminal = "urxvt"
+        , borderWidth = 2
+        , normalBorderColor = "#dddddd"
+        , focusedBorderColor = "#0000ff"
+        , workspaces = myWorkspaces
+        , layoutHook = myLayoutHook
+        , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
+        , logHook = myLogHook status
+        }
+        `additionalKeys` myKeys
+
+myWorkspaces :: [String]
+myWorkspaces = clickable . (map dzenEscape) $ [ "1:Web", "2:File", "3", "4", "5"]
+    where clickable l = [ "^ca(1,xdotool key super+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
+                          (i,ws) <- zip [1..] l,
+                          let n = i ]
+
+myLayoutHook = avoidStruts $ smartBorders $ toggleLayouts full workspaceLayouts
+    where
+        tiled = named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+        mtiled = named "M" $ Mirror tiled
+        full = named "X" $ Full
+        workspaceLayouts = mtiled ||| tiled
+
+myManageHook :: ManageHook
+myManageHook = composeAll
+    [ className =? "TUNet64" --> doF (W.shift (myWorkspaces !! 5))  -- send to ws 5
+    , className =? "firefox" --> doF (W.shift (myWorkspaces !! 1))  -- send to ws 1
+    , className =? "stalonetray" --> doIgnore
+    ]
+
+myLogHook h = dynamicLogWithPP $ myDzenPP { ppOutput = hPutStrLn h} 
+
+myDzenStatus = "dzen2 -w '600' -ta 'l'" ++ myDzenStyle
+myDzenConky = "conky -c ~/.xmonad/conkyrc | dzen2 -x '600' -w '766' -ta 'r'" ++ myDzenStyle
+myDzenStyle = " -h '20' -fg '#777777' -bg '#222222' -fn 'xft:方正苏新诗柳楷简体:bold:size=14'"
+myDzenPP = dzenPP
+    { ppCurrent = dzenColor "#3399ff" "" . wrap " " " "
+    , ppHidden  = dzenColor "#dddddd" "" . wrap " " " "
+    , ppHiddenNoWindows = dzenColor "#777777" "" . wrap " " " "
+    , ppUrgent  = dzenColor "#ff0000" "" . wrap " " " "
+    , ppSep     = "     "
+    , ppLayout  = dzenColor "#aaaaaa" "" . wrap "^ca(1,xdotool key super+space)· " " ·^ca()"
+    , ppTitle   = dzenColor "#ffffff" "" 
+                    . wrap "^ca(1,xdotool key super+k)^ca(2,xdotool key super+shift+c)"
+                           "                          ^ca()^ca()" . shorten 40 . dzenEscape
+    }
+
+myKeys = [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
+         , ((0, xK_Print), spawn "scrot")
+         , ((mod1Mask, xK_d), spawn "j4-dmenu-desktop")
+         , ((mod1Mask, xK_f), sendMessage ToggleLayout)
+         , ((mod1Mask, xK_g), spawn "gmrun")
+         ]
+
+myBitmapsDir = "/home/bibaijin/.xmonad/dzen/bitmap/"

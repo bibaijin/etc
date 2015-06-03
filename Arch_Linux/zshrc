@@ -1,26 +1,22 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# powerline
-# export PYTHONPATH=/usr/lib/python3.4/site-packages
-# . /usr/share/zsh/site-contrib/powerline.zsh
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="random"
-ZSH_THEME="my"
+ZSH_THEME="random"
+# ZSH_THEME="my"
 # ZSH_THEME="linuxonly"
+# ZSH_THEME="simple"
+# ZSH_THEME="bureau"
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="nicoulaj"
-# ZSH_THEME="simple"
 # ZSH_THEME="arrow"
 # ZSH_THEME="gnzh"
 # ZSH_THEME="sporty_256"
 # ZSH_THEME="obraun"
-# ZSH_THEME="my_1"
 # ZSH_THEME="jispwoso"
 DEFAULT_USER="bibaijin"
 
@@ -34,21 +30,21 @@ DEFAULT_USER="bibaijin"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to disable command auto-correction.
-# DISABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -67,7 +63,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=$HOME/bin:/usr/local/bin/:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/bibaijin/.cabal/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -99,6 +95,14 @@ export EDITOR='vim'
 #     export PATH=${PATH}:$HOME/bin
 # fi
 
+export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
+
+# 中文排序
+export LC_COLLATE=zh_CN.UTF-8
+
+# racket 自动补全
+# source /usr/share/racket/pkgs/shell-completion/racket-completion.zsh
+
 # autojump 自动补全
 # autoload -U compinit && compinit -u
 # . /usr/share/autojump/autojump.zsh
@@ -112,3 +116,125 @@ export EDITOR='vim'
 
 # alias markdown='/usr/local/bin/Markdown.pl --html4tags'
 # export TERM=xterm-256color
+
+# ######################
+# Pacman alias examples
+# ######################
+
+# Synchronize with repositories and then upgrade packages that are out of date
+# on the local system.
+alias pacupg='sudo pacman -Syu'
+
+# Install specific package(s) from the repositories
+alias pacin='sudo pacman -S'
+
+# Install specific package not from the repositories but from a file 
+alias pacins='sudo pacman -U'
+
+# Remove the specified package(s), retaining its configuration(s) and required
+# dependencies
+alias pacre='sudo pacman -R'
+
+# Remove the specified package(s), its configuration(s) and unneeded
+# dependencies
+alias pacrem='sudo pacman -Rns'
+
+# Display information about a given package in the repositories
+alias pacrep='pacman -Si'
+
+# Search for package(s) in the repositories
+alias pacreps='pacman -Ss'
+
+# Display information about a given package in the local database
+alias pacloc='pacman -Qi'
+
+# Search for package(s) in the local database
+alias paclocs='pacman -Qs'
+
+# List all packages which are orphaned
+alias paclo="pacman -Qdt"
+
+# Clean cache - delete all not currently installed package files
+alias pacc="sudo pacman -Scc"
+
+# List all files installed by a given package
+alias paclf="pacman -Ql"
+
+# Mark one or more installed packages as explicitly installed 
+alias pacexpl="pacman -D --asexp"
+
+# Mark one or more installed packages as non explicitly installed
+alias pacimpl="pacman -D --asdep"
+
+# '[r]emove [o]rphans' - recursively remove ALL orphaned packages
+alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+
+# Additional pacman alias examples
+
+# Update and refresh the local package and ABS databases against repositories
+alias pacupd='sudo pacman -Sy && sudo abs'
+
+# Install given package(s) as dependencies
+alias pacinsd='sudo pacman -S --asdeps'
+
+# Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+alias pacmir='sudo pacman -Syy'
+
+# ######################
+# Alias
+# ######################
+
+# alias cp="acp -g"
+# alias mv="amv -g"
+# alias maxima="rmaxima"
+alias pandz="pandoc -t dzslides --template=$HOME/share/template/pandoc/dzslides.html \
+    -s -i --slide-level=2 --mathjax --bibliography=ref.bib"
+alias panrv="pandoc -t revealjs -s -i --slide-level=2 --mathjax \
+    --bibliography=ref.bib --toc --toc-depth=2"
+alias panpdf="pandoc --latex-engine=xelatex --template=$HOME/share/template/pandoc/pdf.tex"
+alias panbeamer="pandoc -t beamer --latex-engine=xelatex \
+    --template=$HOME/share/template/pandoc/beamer.tex"
+# alias panhtml="pandoc -t html5 -s -c /home/bibaijin/share/template/pandoc/html.css --toc"
+alias panhtml="pandoc -t html5 --self-contained \
+    --template=/home/bibaijin/share/template/pandoc/pure/html5-my.html --toc --toc-depth=3"
+# alias racket="racket -il readline"
+
+# ######################
+# 自定义函数
+# ######################
+
+# 加密解密文件
+function encrypt()
+{
+    /usr/bin/openssl aes-128-cbc -salt -in $1 -out $1.encrypt && rm -f $1
+}
+
+function decrypt()
+{
+    /usr/bin/openssl aes-128-cbc -d -salt -in $1.encrypt -out $1 && rm -f $1.encrypt
+}
+
+# ranger
+# Compatible with ranger 1.4.2 through 1.6.*
+#
+# Automatically change the directory in bash after closing ranger
+#
+# This is a bash function for .bashrc to automatically change the directory to
+# the last visited one after ranger quits.
+# To undo the effect of this function, you can type "cd -" to return to the
+# original directory.
+
+function ranger-cd {
+    tempfile='/tmp/chosendir'
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+
+# This binds Ctrl-O to ranger-cd:
+# bind '"\C-o":"ranger-cd\C-m"'
+bindkey -s '\C-o' '^qranger-cd\n'
+alias ranger="ranger-cd"

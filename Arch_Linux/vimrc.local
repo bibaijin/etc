@@ -1,0 +1,50 @@
+"""""""""""""""""""""""
+" 基本设置
+"""""""""""""""""""""""
+" 环境
+" 设置编码，以支持中文
+set fileencodings-=latin1
+set fileencodings+=gb18030,big5,latin1
+
+" 外观
+" 排版
+set textwidth=78  " 自动换行
+" m: 按字符为单位分行
+" M: 连接行时，不要插入空格
+set formatoptions+=mM
+
+" Tab specific option
+set tabstop=8                   "A tab is 8 spaces
+set expandtab                   "Always uses spaces instead of tabs
+set softtabstop=4               "Insert 4 spaces when tab is pressed
+set shiftwidth=4                "An indent is 4 spaces
+set shiftround                  "Round indent to nearest shiftwidth multiple
+
+set relativenumber " 相对行号
+set noignorecase
+
+" 显示
+" set cole=2
+" let g:tex_conceal = 'adgms'
+
+" 当前行高亮
+set cursorline
+hi CursorLine cterm=NONE ctermbg=black
+" 状态栏
+set showcmd " 显示命令
+
+" 快捷键
+" 插入模式
+" 跳到行首
+imap <C-a> <Esc>I
+" 跳到行尾
+imap <C-e> <Esc>A
+imap <C-p> <Esc>:tabprevious<CR>i
+imap <C-n> <Esc>:tabnext<CR>i
+
+"""""""""""""""
+" 插件
+"""""""""""""""
+" vim-haskellConcealPlus
+" SuperTab
+let g:SuperTabDefaultCompletionType = "context"

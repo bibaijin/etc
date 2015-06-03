@@ -79,20 +79,19 @@ bindsym Mod1+a focus parent
 # bindsym Mod1+d focus child
 
 # Workspace name
-workspace "1:文件" output LVDS1
-workspace "2:网络" output LVDS1
-workspace "3:Shell" output LVDS1
-workspace "4:工具" output LVDS1
+workspace "1:主要" output LVDS1
+workspace "2:临时" output LVDS1
+workspace "5:后台" output LVDS1
 # switch to workspace
 # bindsym Mod1+1 workspace 1
-bindsym Mod1+1 workspace 1:文件
+bindsym Mod1+1 workspace 1:主要
 # bindsym Mod1+2 workspace 2
-bindsym Mod1+2 workspace 2:网络
+bindsym Mod1+2 workspace 2:临时
 # bindsym Mod1+3 workspace 3
-bindsym Mod1+3 workspace 3:Shell
+bindsym Mod1+3 workspace 3
 # bindsym Mod1+4 workspace 4
-bindsym Mod1+4 workspace 4:工具
-bindsym Mod1+5 workspace 5
+bindsym Mod1+4 workspace 4
+bindsym Mod1+5 workspace 5:后台
 bindsym Mod1+6 workspace 6
 bindsym Mod1+7 workspace 7
 bindsym Mod1+8 workspace 8
@@ -101,14 +100,14 @@ bindsym Mod1+0 workspace 10
 
 # move focused container to workspace
 # bindsym Mod1+Shift+1 move workspace 1
-bindsym Mod1+Shift+1 move container to workspace 1:文件
+bindsym Mod1+Shift+1 move container to workspace 1:主要
 # bindsym Mod1+Shift+2 move workspace 2
-bindsym Mod1+Shift+2 move container to workspace 2:网络
+bindsym Mod1+Shift+2 move container to workspace 2:临时
 # bindsym Mod1+Shift+3 move workspace 3
-bindsym Mod1+Shift+3 move container to workspace 3:Shell
+bindsym Mod1+Shift+3 move container to workspace 3
 # bindsym Mod1+Shift+4 move workspace 4
-bindsym Mod1+Shift+4 move container to workspace 4:工具
-bindsym Mod1+Shift+5 move workspace 5
+bindsym Mod1+Shift+4 move container to workspace 4
+bindsym Mod1+Shift+5 move workspace 5:后台
 bindsym Mod1+Shift+6 move workspace 6
 bindsym Mod1+Shift+7 move workspace 7
 bindsym Mod1+Shift+8 move workspace 8
@@ -200,18 +199,18 @@ bar {
 
 # layout mode
 workspace_layout tabbed
-# bindsym Mod4+q exec --no-startup-id gksudo bash -c 'echo "mem" > /sys/power/state'
-# bindsym Mod1+q exec echo "mem"
-# bindsym Mod4+l exec bash -c 'echo "mem" > /sys/power/state'
-# bindsym Mod1+q exec --no-startup-id sudo pm-suspend
-# 锁屏和挂起
-set $mode_system System (l) lock, (s) suspend
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-	# 锁屏和挂起
-	bindsym l exec --no-startup-id i3exit lock, mode "default"
-	bindsym s exec --no-startup-id i3exit suspend, mode "default"
-	# 返回正常模式
-	bindsym Escape mode "default"
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym Mod4+l mode "$mode_system"
 
@@ -220,10 +219,10 @@ bindsym Mod4+l mode "$mode_system"
 # 打字时禁用触摸板 2 s
 # exec_always syndaemon -t -k -i 2 &
 # exec syndaemon -t -k -i 2 &
-exec syndaemon -i 2 -d
+# exec syndaemon -i 2 -d
 
 # 设置壁纸
-exec feh -z --bg-scale ~/.wallpaper/*
+# exec feh -z --bg-scale ~/.wallpaper/*
 
 # 坚果云
 # exec_always ~/.nutstore/dist/bin/nutstore-pydaemon.py
@@ -236,10 +235,10 @@ exec feh -z --bg-scale ~/.wallpaper/*
 
 # 星际译王
 # exec_always stardict
-assign [class="Stardict"] 4:工具
+# assign [class="Stardict"] 4:工具
 # exec stardict
 
 # TUNet
 # exec_always TUNet64
-assign [class="TUNet64"] 4:工具
+# assign [class="TUNet64"] 4:工具
 # exec TUNet64

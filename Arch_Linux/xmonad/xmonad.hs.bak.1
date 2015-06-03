@@ -1,0 +1,23 @@
+-- Imports.
+import XMonad
+import XMonad.Hooks.DynamicLog
+imp
+
+-- The main function.
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+
+-- Command to launch the bar
+myBar = "xmobar"
+
+-- Cutom PP
+myPP = xmobarPP {ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
+
+-- Key bindings to toggle the gap for the bar.
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+-- Main configuration
+myConfig = defaultConfig
+        { borderWidth = 2
+        , terminal = "urxvt"
+        , normalBorderColor = "#cccccc"
+        , focusedBorderColor = "#cd8b00" }
