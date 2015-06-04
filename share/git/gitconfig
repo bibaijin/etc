@@ -1,0 +1,9 @@
+[user]
+	email = bibaijin@gmail.com
+	name = bibaijin
+[core]
+	autocrlf = input
+	safecrlf = true
+	excludesfile = /home/bibaijin/.gitignore_global
+	editor = /usr/bin/vim
+	quotepath = false
