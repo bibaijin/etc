@@ -4,7 +4,7 @@
 [core]
 	autocrlf = input
 	safecrlf = true
-	excludesfile = /home/bibaijin/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 	quotepath = false
 [merge]

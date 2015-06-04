@@ -18,6 +18,7 @@ compinit
 ##########################
 # 环境变量
 ##########################
+
 export LC_CTYPE=zh_CN.UTF-8     # 中文处理
 export LC_COLLATE=zh_CN.UTF-8   # 中文排序
 export EDITOR='vim'
@@ -118,9 +119,9 @@ zstyle ':completion:*' list-colors ''
 # Alias
 # ######################
 
-alias ls="ls --color=auto"
-alias ll="ls -l --color=auto"
-alias la="ls -a --color=auto"
+alias ls="ls -G"
+alias ll="ls -l -G"
+alias la="ls -a -G"
 
 # pacman
 # Synchronize with repositories and then upgrade packages that are out of date
@@ -226,7 +227,8 @@ function decrypt()
 
 function ranger-cd {
     tempfile='/tmp/chosendir'
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    # /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    ranger --choosedir="$tempfile" "${@:-$(pwd)}"
     test -f "$tempfile" &&
     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
         cd -- "$(cat "$tempfile")"
