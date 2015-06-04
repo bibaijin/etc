@@ -5,5 +5,7 @@
 	autocrlf = input
 	safecrlf = true
 	excludesfile = /home/bibaijin/.gitignore_global
-	editor = /usr/bin/vim
+	editor = vim
 	quotepath = false
+[merge]
+	tool = vimdiff
