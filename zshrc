@@ -18,11 +18,10 @@ compinit
 ##########################
 # 环境变量
 ##########################
-# 中文处理
-export LC_CTYPE=zh_CN.UTF-8
-# 中文排序
-export LC_COLLATE=zh_CN.UTF-8
+export LC_CTYPE=zh_CN.UTF-8     # 中文处理
+export LC_COLLATE=zh_CN.UTF-8   # 中文排序
 export EDITOR='vim'
+export PATH=$PATH:$HOME/Library/Haskell/bin/
 export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
 
 ##########################
