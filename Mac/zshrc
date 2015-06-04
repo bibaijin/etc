@@ -1,0 +1,246 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/bibaijin/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+##########################
+# my
+##########################
+
+##########################
+# 环境变量
+##########################
+# 中文处理
+export LC_CTYPE=zh_CN.UTF-8
+# 中文排序
+export LC_COLLATE=zh_CN.UTF-8
+export EDITOR='vim'
+export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
+
+##########################
+# 插件管理
+##########################
+
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /etc/profile.d/autojump.zsh
+
+# source /home/bibaijin/.config/zsh/antigen/antigen.zsh
+source $HOME/.config/zsh/antigen/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle tarruda/zsh-autosuggestions
+# antigen bundle hchbaw/auto-fu.zsh
+antigen bundle olivierverdier/zsh-git-prompt
+
+# Load the oh-my-zsh's library.
+# antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+# antigen bundle git
+# antigen bundle heroku
+# antigen bundle pip
+# antigen bundle lein
+# antigen bundle command-not-found
+
+# Load the theme.
+# antigen theme robbyrussell
+
+# Tell antigen that you're done.
+antigen apply
+
+# auto-fu.zsh
+# zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+# zstyle ':completion:*' completer _oldlist _complete
+# zle -N zle-keymap-select auto-fu-zle-keymap-select
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Setup zsh-autosuggestions
+# source ~/.zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically
+zle-line-init() {
+    zle autosuggest-start
+}
+zle -N zle-line-init
+
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+# bindkey '^T' autosuggest-toggle
+
+##########################
+# 提示符
+##########################
+
+autoload -U promptinit
+promptinit
+# prompt adam2
+# git
+# source ~/bin/zsh-git-prompt/zshrc.sh
+user="%{$fg[cyan]%}%n%{$reset_color%}"
+host="%{$fg[yellow]%}%m%{$reset_color%}"
+work_path="%{$fg_no_bold[green]%}%~%{$reset_color%}"
+# PROMPT='$user%B@%b$host: $work_path$(git_super_status)> %B%# '
+PS1='$user%B@%b$host: $work_path $(git_super_status)
+%B>>%b '
+PS2='.. '
+RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
+
+##########################
+# 自动补全
+##########################
+
+if [ "x$CASE_SENSITIVE" = "xtrue" ]; then
+  zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  unset CASE_SENSITIVE
+else
+  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  zstyle ':completion:*' menu select
+fi
+
+zstyle ':completion:*' list-colors ''
+
+# zstyle -e ':completion:*:default' list-colors \
+#     'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=01}:${(s.:.)LS_COLORS}")'
+
+##########################
+# 预测
+##########################
+# autoload -U predict-on
+# predict-on
+# zle -N predict-on
+# zle -N predict-off
+# bindkey '^X^Z' predict-on
+# bindkey '^z' predict-off
+
+# ######################
+# Alias
+# ######################
+
+alias ls="ls -G"
+alias ll="ls -l -G"
+alias la="ls -a -G"
+
+# pacman
+# Synchronize with repositories and then upgrade packages that are out of date
+# on the local system.
+alias pacupg='sudo pacman -Syu'
+
+# Install specific package(s) from the repositories
+alias pacin='sudo pacman -S'
+
+# Install specific package not from the repositories but from a file 
+alias pacins='sudo pacman -U'
+
+# Remove the specified package(s), retaining its configuration(s) and required
+# dependencies
+alias pacre='sudo pacman -R'
+
+# Remove the specified package(s), its configuration(s) and unneeded
+# dependencies
+alias pacrem='sudo pacman -Rns'
+
+# Display information about a given package in the repositories
+alias pacrep='pacman -Si'
+
+# Search for package(s) in the repositories
+alias pacreps='pacman -Ss'
+
+# Display information about a given package in the local database
+alias pacloc='pacman -Qi'
+
+# Search for package(s) in the local database
+alias paclocs='pacman -Qs'
+
+# List all packages which are orphaned
+alias paclo="pacman -Qdt"
+
+# Clean cache - delete all not currently installed package files
+alias pacc="sudo pacman -Scc"
+
+# List all files installed by a given package
+alias paclf="pacman -Ql"
+
+# Mark one or more installed packages as explicitly installed 
+alias pacexpl="pacman -D --asexp"
+
+# Mark one or more installed packages as non explicitly installed
+alias pacimpl="pacman -D --asdep"
+
+# '[r]emove [o]rphans' - recursively remove ALL orphaned packages
+alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+
+# Additional pacman alias examples
+
+# Update and refresh the local package and ABS databases against repositories
+alias pacupd='sudo pacman -Sy && sudo abs'
+
+# Install given package(s) as dependencies
+alias pacinsd='sudo pacman -S --asdeps'
+
+# Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+alias pacmir='sudo pacman -Syy'
+
+# alias cp="acp -g"
+# alias mv="amv -g"
+# alias maxima="rmaxima"
+# alias racket="racket -il readline"
+
+# pandoc
+alias pandz="pandoc -t dzslides --template=$HOME/share/template/pandoc/dzslides.html \
+    -s -i --slide-level=2 --mathjax --bibliography=ref.bib"
+alias panrv="pandoc -t revealjs -s -i --slide-level=2 --mathjax \
+    --bibliography=ref.bib --toc --toc-depth=2"
+alias panpdf="pandoc --latex-engine=xelatex --template=$HOME/share/template/pandoc/pdf.tex"
+alias panbeamer="pandoc -t beamer --latex-engine=xelatex \
+    --template=$HOME/share/template/pandoc/beamer.tex"
+# alias panhtml="pandoc -t html5 -s -c /home/bibaijin/share/template/pandoc/html.css --toc"
+alias panhtml="pandoc -t html5 --self-contained \
+    --template=/home/bibaijin/share/template/pandoc/pure/html5-my.html --toc --toc-depth=3"
+
+# ######################
+# 自定义函数
+# ######################
+
+# 加密解密文件
+function encrypt()
+{
+    /usr/bin/openssl aes-128-cbc -salt -in $1 -out $1.encrypt && rm -f $1
+}
+
+function decrypt()
+{
+    /usr/bin/openssl aes-128-cbc -d -salt -in $1.encrypt -out $1 && rm -f $1.encrypt
+}
+
+# ranger
+# Compatible with ranger 1.4.2 through 1.6.*
+#
+# Automatically change the directory in bash after closing ranger
+#
+# This is a bash function for .bashrc to automatically change the directory to
+# the last visited one after ranger quits.
+# To undo the effect of this function, you can type "cd -" to return to the
+# original directory.
+
+function ranger-cd {
+    tempfile='/tmp/chosendir'
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+
+# This binds Ctrl-O to ranger-cd:
+# bind '"\C-o":"ranger-cd\C-m"'
+bindkey -s '\C-o' '^qranger-cd\n'
+alias ranger="ranger-cd"
+
