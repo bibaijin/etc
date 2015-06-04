@@ -241,3 +241,5 @@ function ranger-cd {
 bindkey -s '\C-o' '^qranger-cd\n'
 alias ranger="ranger-cd"
 
+
+source /Users/bibaijin/.iterm2_shell_integration.zsh
