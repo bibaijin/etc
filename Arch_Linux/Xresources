@@ -26,6 +26,18 @@ URxvt.font: xft:Inconsolata:size=16, xft:WenQuanYi Micro Hei Mono:size=16, xft:D
 ! URxvt.font: xft: Source Code Pro for Powerline:size=16, xft:WenQuanYi Micro Hei Mono:size=16
 ! URxvt.letterSpace: -5
 
+!---------------------------
+! 插件
+!---------------------------
+! urxvt-perls
+! copy and paste
+URxvt.perl-ext-common: ...,clipboard
+URxvt.keysym.M-c:   perl:clipboard:copy
+/* URxvt.keysym.M-v:   perl:clipboard:paste */
+URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.iso14755: False
+
 !-------------------------------------------------------------------------------
 ! Xft settings
 !-------------------------------------------------------------------------------
