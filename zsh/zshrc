@@ -25,6 +25,10 @@ export LC_COLLATE=zh_CN.UTF-8
 export EDITOR='vim'
 export PYTHONPATH=$HOME/src/python/Intro_Algor:$PYTHONPATH
 
+if [[ $TERM == rxvt-unicode ]]; then
+  TERM=rxvt-unicode-256color
+fi
+
 ##########################
 # 插件管理
 ##########################

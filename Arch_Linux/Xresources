@@ -22,7 +22,8 @@ URxvt.termName: rxvt-unicode
 ! 字体
 ! URxvt.font: 9x15
 Xft.dpi: 96
-URxvt.font: xft:Inconsolata:size=16, xft:WenQuanYi Micro Hei Mono:size=16, xft:DejaVu Sans Mono:size=16, xft:FreeSerif:size=16
+/* URxvt.font: xft:Inconsolata:size=16, xft:WenQuanYi Micro Hei Mono:size=16, xft:DejaVu Sans Mono:size=16, xft:FreeSerif:size=16 */
+URxvt.font: xft:Inconsolata for Powerline:size=16, xft:WenQuanYi Micro Hei Mono:size=16, xft:DejaVu Sans Mono:size=16, xft:FreeSerif:size=16
 ! URxvt.font: xft: Source Code Pro for Powerline:size=16, xft:WenQuanYi Micro Hei Mono:size=16
 ! URxvt.letterSpace: -5
 

@@ -19,9 +19,10 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true \
 
 xsetroot -cursor_name left_ptr & # set cursor
 
-syndaemon -i 2 -d &
+# syndaemon -i 2 -d &
 
 fcitx &
+# sogou-qimpanel &
 
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
